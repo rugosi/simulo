@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="shortcut icon" href="favicon.ico">
+
+  <meta charset="utf-8"> 
+  <style type="text/css">
+
+    body {
+      background-color : #DCDCDC;
+      font-family: sans-serif; 
+      font-size: 12pt;
+    }
+
+    td {
+      border: 1px solid black;
+      text-align: center;
+      padding: 0;
+     // background-color: #99CCFF;
+      width: 60px;
+    }
+
+    th {
+      border: 1px solid black;
+      text-align: center;
+      width: 80px;
+    }
+
+    input {
+      border: solid black 0px;
+      text-align: center;
+      padding: 0;
+      margin: 0;
+      font-size: 12pt;
+      width: 100%;
+      height: 100%;
+      background-color: white;
+    }
+
+    table {
+      border-collapse:collapse;
+    }
+
+
+    #settings {
+      border: 1px solid black;
+      text-align: center;
+      padding: 0;
+      width: 60px;
+    }
+
+    #simuspace {
+     margin-top: 1em;
+    }
+
+    #diagspace {
+      margin-top: 1em;
+      width: 500px;
+      height: 150;>
+    }
+  
+    #stepbox {
+      margin-top: 1em;
+      margin-bottom: 1em;
+    }  
+
+    #cells, #tabledata {
+      width: 500px;
+    }
+
+    #tabledata {
+      margin-bottom: 1em;
+    }
+
+    #errors {
+      width: 500px;
+      margin-bottom: 1em;
+    }
+
+    #lepesek {
+      background-color: black;
+      font-weight: bold;
+      color: white;
+    }
+
+    #diag_plant {
+      float: left;
+    }
+
+    #diag_anim {
+      float: right;
+    }
+
+
+    .startvalues {
+      color: darkgray;
+    }
+
+    .fox_color {
+      color: #FF0000;
+      background-color: #8B0000;
+    } 
+
+    .rabbit_color {
+      color: #1E90FF;
+      background-color: #000080;
+    } 
+  
+    .plant_color {
+      color: #00FF00;
+      background-color: #336633; 
+    } 
+  
+    .driedplant-color {
+      color: #FFD700;
+      background-color: yellow ;
+    } 
+
+    .wolf_color {
+      color: black;
+      background-color: #A0A0A0;
+    } 
+    
+    .property {
+      width: 100px;
+      text-align: left;
+    }
+
+    
+
+  </style>
+</head>
+<body>
+
+<script src="simulation.js">
+</script>
+
+<div>
+  <button type="button" onclick="start()">Start</button>
+  <button type="button" onclick="stop()">Stop</button>
+  <button type="button" onclick="resetSimulation()">Reset simulation</button>
+</div>
+
+<div id="stepbox"> Steps: <span id="lepesek" >0 </span></div>
+<div id="errors"></div>
+
+<div id="tabledata">
+  <table id="cells">
+    <tr>
+     <th></th> 
+     <th class="plant_color">Plants</th> 
+     <th class="rabbit_color">Rabbits</th> 
+     <th class="fox_color">Foxes</th> 
+     <th class="wolf_color">Wolves</th> 
+    </tr>
+    <tr>
+     <th class="property">Live</th> 
+     <td id="plants_out">0</td> 
+     <td id="rabbits_out">0</td> 
+     <td id="foxes_out">0</td> 
+     <td id="wolves_out">0</td> 
+    </tr>
+    <tr>
+     <th class="property">Dried</th> 
+     <td id="driedplants_out">0</td> 
+     <td> - </td>
+     <td> - </td>
+     <td> - </td>
+    </tr>
+    <tr>
+     <th class="property">Start value</th> 
+     <td><input type="text" value="0" min="0" max="8000" onkeyup="updateData(this)" class="startvalues" id="startvalue_plants" /></td> 
+     <td><input type="text" value="0" min="0" max="4000" onkeyup="updateData(this)" class="startvalues" id="startvalue_rabbits" /></td> 
+     <td><input type="text" value="0" min="0" max="2000" onkeyup="updateData(this)" class="startvalues" id="startvalue_foxes" /></td> 
+     <td><input type="text" value="0" min="0" max="2000" onkeyup="updateData(this)" class="startvalues" id="startvalue_wolves" /></td> 
+    </tr>
+    <tr>
+     <th class="property">Natality</th> 
+     <td><input type="text" value="0" min="0" max="100" onkeyup="updateData(this)" id="natality_plants" /></td> 
+     <td><input type="text" value="0" min="0" max="100" onkeyup="updateData(this)" id="natality_rabbits" /></td> 
+     <td><input type="text" value="0" min="0" max="100" onkeyup="updateData(this)" id="natality_foxes" /></td> 
+     <td><input type="text" value="0" min="0" max="100" onkeyup="updateData(this)" id="natality_wolves" /></td> 
+    </tr>
+    <tr>
+     <th class="property">Mortality</th> 
+     <td><input type="text" value="0" min="0" max="100" onkeyup="updateData(this)" id="mortality_plants" /></td> 
+     <td><input type="text" value="0" min="0" max="100" onkeyup="updateData(this)" id="mortality_rabbits" /></td> 
+     <td><input type="text" value="0" min="0" max="100" onkeyup="updateData(this)" id="mortality_foxes" /></td> 
+     <td><input type="text" value="0" min="0" max="100" onkeyup="updateData(this)" id="mortality_wolves" /></td> 
+    </tr>
+    <tr>
+     <th class="property">Zone</th> 
+     <td> - </td>
+     <td><input type="text" value="0" min="1" max="5" onkeyup="updateData(this)" id="zone_rabbits" /></td> 
+     <td><input type="text" value="0" min="1" max="5" onkeyup="updateData(this)" id="zone_foxes" /></td> 
+     <td><input type="text" value="0" min="1" max="5" onkeyup="updateData(this)" id="zone_wolves" /></td> 
+    </tr>
+    <tr>
+     <th class="property">Need</th> 
+     <td> - </td>
+     <td><input type="text" value="1" min="1" max="5" onkeyup="updateData(this)" id="needed_rabbits" /></td> 
+     <td><input type="text" value="1" min="1" max="5" onkeyup="updateData(this)" id="needed_foxes" /></td> 
+     <td><input type="text" value="1" min="1" max="5" onkeyup="updateData(this)" id="needed_wolves" /></td> 
+    </tr>
+    <tr>
+     <th class="property">Regeneration</th> 
+     <td><input type="text" value="0" min="0" max="100" onkeyup="updateData(this)" id="regeneration_driedplants" /></td> 
+     <td > - </td>
+     <td > - </td>
+     <td > - </td>
+    </tr>
+  </table>
+</div>
+
+<div id="simuspace">
+  <canvas id="terulet" width="500" height="500" style="border: solid 1px black;">
+</div>
+
+<div id="diagspace">
+  <div id="diag_left" > 
+    <canvas id="diag_plant" width="245" height="160px" style="border: solid 1px black;">
+  </div>
+  <div id="diag_right">
+    <canvas id="diag_anim" width="245" height="160px" style="border: solid 1px black;">
+  </div>
+</div>
+
+<div id="mesured_time"> 
+</div>
+
+<script src="init_simulation.js">
+</script>
+
+</body>
+</html> 
+

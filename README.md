@@ -27,4 +27,4 @@ You can challenge yourself with funny objectives:
 * let the foxes survive
 * etc.
 
-_Note: Please don't make to much harm to these animals, they are so innocent._
+_Note: Please don't make harm to these animals, they are so innocent._

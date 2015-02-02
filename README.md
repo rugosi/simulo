@@ -8,10 +8,10 @@ It is a simple simulation script on the theme predator & prey, with a reduced nu
 
 ## Actor activities:
 * **dried plants:** revives or dies
-* **plants:** dries or survives and/or reproduces
-* **rabbits:** dies or eats and/or reproduces
-* **wolves:** dies or eats and/or reproduces
-* **foxes:** dies or eats and/or reproduces
+* **plants:** dries or rebirths or survives and eventually reproduces
+* **rabbits:** dies or eats and eventually reproduces
+* **wolves:** dies or eats and eventually reproduces
+* **foxes:** dies or eats and eventually reproduces
 
 ## Obligatory screenshot of the gui:
 ![image](http://tinstall.hu/szimulacio/simulo.jpg)

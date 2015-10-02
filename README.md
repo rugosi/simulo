@@ -14,7 +14,7 @@ It is a simple simulation script on the theme predator & prey, with a reduced nu
 * **foxes:** dies or eats and eventually reproduces
 
 ## Obligatory screenshot of the gui:
-![image](http://tinstall.hu/szimulacio/simulo.jpg)
+![image](images/simulo.jpg)
 
 The **gray color data** is only used when simulation is reset.
 The **black color data** on white cells are validated immediately.

@@ -695,5 +695,5 @@ function updateDiagram(lifearray, graphtype, diagname, kurzorcolor)
 //    -- maybe with some parameters disabled... 
 //    -- to implement: challenge tester, value initialisation ...
 // - implement data saving (png?, localstorage?, both?)
-//
+// Ok, that is fine.
 
